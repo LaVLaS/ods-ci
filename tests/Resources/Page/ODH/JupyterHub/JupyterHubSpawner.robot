@@ -2,9 +2,12 @@
 Library  JupyterLibrary
 Library  String
 
+*** Variables ***
+${JUPYTERHUB_SPAWNER_HEADER_XPATH} =  //div[contains(@class,"jsp-spawner__header__title") and .="Start a notebook server"]
+
 *** Keywords ***
 JupyterHub Spawner Is Visible
-   ${spawner_visible} =  Run Keyword and Return Status  Element Should Be Visible  xpath://h1[@id="header-text" and .="Spawner Options"]
+   ${spawner_visible} =  Run Keyword and Return Status  Wait Until Element Is Visible  xpath:${JUPYTERHUB_SPAWNER_HEADER_XPATH}
    [return]  ${spawner_visible}
 
 Select Notebook Image
